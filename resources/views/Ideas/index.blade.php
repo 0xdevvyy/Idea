@@ -5,7 +5,16 @@
             <p class="tezt-muted-foreground tezt-sm mt-2">Capture your thoughts. Make a Plan.</p>
         </header>
         <hr>
-        <div class="mt-10 text-muted-foreground">
+        <div class="mt-2">
+                <a href="/ideas" class="btn {{ request()->has('status') ? 'btn-outlined' : '' }}">All <span>{{ $statusCount->get('all')}}</span></a>
+            @foreach (App\IdeaStatus::cases() as $status)
+                <a href="/ideas?status={{ $status->value }}" class="btn {{ request('status') === $status->value ? '' : 'btn-outlined' }}">
+                    {{ $status->label() }} <span class="text-xs pl-2">{{ $statusCount->get($status->value)}}</span>
+                </a>
+            @endforeach
+           
+        </div>
+        <div class="mt-10 text-muted-foreground">   
             <div class="grid md:grid-cols-2 gap-6"> 
                 @forelse ($ideas as $idea)
                     <x-card href="{{ route('ideas.show', $idea) }}"> 
