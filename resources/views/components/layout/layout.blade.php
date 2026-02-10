@@ -7,7 +7,7 @@
     <title>IDEA</title>
      @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-background text-foreground">
+<body class="min-h-screenn bg-background text-foreground">
     <x-layout.nav />
     <main class="max-w-7xl mx-auto px-6">
         {{ $slot }}
