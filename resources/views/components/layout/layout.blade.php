@@ -16,12 +16,7 @@
    @session('success')
     <div
         x-data="{ show: true }"
-         x-init="
-        setTimeout(() => {
-            show = false
-            console.log('closed')
-        }, 3000)
-    "
+        x-init="setTimeout(() => show = false, 3000)"
         x-show="show"
         x-transition.opacity.duration.300ms
         x-cloak
