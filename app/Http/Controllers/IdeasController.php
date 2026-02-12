@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreIdeaRequest;
 use App\IdeaStatus;
 use App\Models\Ideas;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class IdeasController extends Controller
             ->ideas()
             // ->where('status', 'pending')
             ->when(in_array($request->status, IdeaStatus::values()), fn ($query) => $query->where('status', $request->status))
+            ->latest()
             ->get();
 
         return view('ideas.index', [
@@ -35,15 +37,18 @@ class IdeasController extends Controller
      */
     public function create(): void
     {
-        //
+      
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): void
+    public function store(StoreIdeaRequest $request)
     {
-        //
+        // dd($request->all());
+        Auth::user()->ideas()->create($request->validated());
+
+        return to_route('ideas.index')->with('success', 'Idea is Created');
     }
 
     /**

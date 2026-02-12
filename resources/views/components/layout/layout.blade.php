@@ -13,7 +13,7 @@
         {{ $slot }}
     </main>
     
-   @session('success')
+   {{-- @session('success')
     <div
         x-data="{ show: true }"
         x-init="setTimeout(() => show = false, 3000)"
@@ -24,7 +24,7 @@
     >
         testing
     </div>
-    @endsession
+    @endsession --}}
 
         
 

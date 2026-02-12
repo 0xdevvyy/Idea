@@ -24,6 +24,7 @@ class Ideas extends Model
     ];
 
     protected $attributes = [
+        'links' => '[]',
         'status' => IdeaStatus::PENDING,
     ];
 
