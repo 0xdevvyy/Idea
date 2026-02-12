@@ -2,7 +2,16 @@
     <div >
         <header class="py-8 md:py-12">
             <h1 class="text-3xl font-bold">Ideas</h1>
-            <p class="tezt-muted-foreground tezt-sm mt-2">Capture your thoughts. Make a Plan.</p>
+            <p class="text-muted-foreground tezt-sm mt-2">Capture your thoughts. Make a Plan.</p>
+            <x-card 
+                x-data
+                @click="$dispatch('open-modal', 'create-idea')"
+                class="mt-10 space-y-3 cursor-pointer h-32 w-full" 
+                is="button"
+                type="button"
+            >
+                What's the Idea?
+            </x-card>
         </header>
         <hr>
         <div class="mt-2">
@@ -36,6 +45,9 @@
             </div>
 
         </div>
-
+        <!--Modal -->
+        <x-modal name="create-idea" title="New Idea">
+            This is a idea
+        </x-modal>
     </div>
 </x-layout>

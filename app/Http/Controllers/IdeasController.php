@@ -17,16 +17,10 @@ class IdeasController extends Controller
     public function index(Request $request)
     {
 
-        $status = $request->status;
-
-        if (! in_array($status, IdeaStatus::values())) {
-            $status = null;
-        }
-
         $ideas = Auth::user()
             ->ideas()
             // ->where('status', 'pending')
-            ->when($status, fn ($query, $status) => $query->where('status', $status))
+            ->when(in_array($request->status, IdeaStatus::values()), fn ($query) => $query->where('status', $request->status))
             ->get();
 
         return view('ideas.index', [
