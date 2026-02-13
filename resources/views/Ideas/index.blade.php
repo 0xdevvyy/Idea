@@ -47,7 +47,7 @@
         </div>
         <!--Modal -->
         <x-modal name="create-idea" title="New Idea">
-            <form x-data="{status : 'pending'} " action="{{ route('ideas.create') }}" method="POST">
+            <form x-data="{status : 'pending', newLink : '', links: []} " action="{{ route('ideas.create') }}" method="POST">
                 @csrf
 
                 <div class="space-y-6">
@@ -86,6 +86,49 @@
                         placeholder="Descripe Your Idea Title"
                         autofocus
                     />
+
+                  
+
+                    <div>
+                        <fieldset class="space-y-3">
+                            <legend class="label">Links</legend>
+
+
+                            <template x-for="(link, index) in links" >
+                                <div class="flex gap-x-2 items-center">
+                                    <input name="links[]" x-model="link" class="input">
+                                    <button 
+                                        type="button"
+                                        @click="links.splice(index, 1);"
+                                        class="form-muted-icon"
+                                    >x</button>
+                                </div>
+                            </template>
+
+
+                            <div class="flex gap-x-2 items-center">
+                                <input 
+                                    x-model="newLink"
+                                    type="url" 
+                                    id="new-link" 
+                                    placeholder="https://example.com"
+                                    autocomplete="url"
+                                    class="input flex-1"
+                                    spellcheck="false"
+                                >
+                                <button 
+                                    type="button"
+                                    @click="links.push(newLink.trim()); newLink = ''; "
+                                    :disabled = "newLink.trim().length === 0"
+                                    class="form-muted-icon"
+                                >+</button>
+                            </div>
+
+                        
+                        </fieldset>
+                        
+                    </div>
+
                     <div class="flex justify-end gap-x-5">
                         <button type="button" class="btn btn-outlined" @click="$dispatch('close-modal')">Cancel</button>
                         <button type="submit" class="btn">Submit</button>
