@@ -47,7 +47,7 @@
         </div>
         <!--Modal -->
         <x-modal name="create-idea" title="New Idea">
-            <form x-data="{status : 'pending', newLink : '', links: []} " action="{{ route('ideas.create') }}" method="POST">
+            <form x-data="{status : 'pending', newLink : '', links: [], newStep : '', steps: [],} " action="{{ route('ideas.create') }}" method="POST">
                 @csrf
 
                 <div class="space-y-6">
@@ -86,7 +86,44 @@
                         placeholder="Descripe Your Idea Title"
                         autofocus
                     />
+                    <!--Steps -->
+                    <div>
+                        <fieldset class="space-y-3">
+                            <legend class="label">steps</legend>
 
+
+                            <template x-for="(step, index) in steps" >
+                                <div class="flex gap-x-2 items-center">
+                                    <input name="steps[]" x-model="step" class="input">
+                                    <button 
+                                        type="button"
+                                        @click="steps.splice(index, 1);"
+                                        class="form-muted-icon"
+                                    >x</button>
+                                </div>
+                            </template>
+
+
+                            <div class="flex gap-x-2 items-center">
+                                <input 
+                                    x-model="newStep" 
+                                    id="new-step" 
+                                    placeholder="Add a New Steps"
+                                    class="input flex-1"
+                                    spellcheck="false"
+                                >
+                                <button 
+                                    type="button"
+                                    @click="steps.push(newStep.trim()); newStep = ''; "
+                                    :disabled = "newStep.trim().length === 0"
+                                    class="form-muted-icon"
+                                >+</button>
+                            </div>
+
+                        
+                        </fieldset>
+                        
+                    </div>
                   
 
                     <div>
