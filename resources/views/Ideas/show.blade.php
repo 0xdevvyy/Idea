@@ -40,7 +40,7 @@
                                     <div class="flex items-center gap-x-3">
                                         <button type="submit" class="size-5 flex items-center justify-center rounded-lg text-primary-foreground {{$step->completed ? 'bg-primary' : 'border border-primary' }}">
                                             &check;
-                                        </button>
+                                        </button>s
                                         <span class="{{ $step->completed ? 'line-through text-muted-foreground' : ''  }}">{{$step->description}}</span>
                                     </div>
                                 </form>
