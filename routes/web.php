@@ -16,7 +16,7 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/step/{step}', [StepsController::class, 'update'])->name('steps.update');
 
-    Route::delete('/idea/{idea}',[IdeasController::class, 'destroy'])->name('ideas.delete');
+    Route::delete('/idea/{idea}', [IdeasController::class, 'destroy'])->name('ideas.delete');
 
     Route::post('logout', [SessionsController::class, 'destroy']);
 });
