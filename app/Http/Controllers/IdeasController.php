@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreateIdea;
 use App\Http\Requests\StoreIdeaRequest;
 use App\IdeaStatus;
 use App\Models\Ideas;
@@ -35,30 +36,16 @@ class IdeasController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): void
-    {
-      
-    }
+    public function create(): void {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreIdeaRequest $request)
+    public function store(StoreIdeaRequest $request, CreateIdea $action)
     {
         // dd($request->all());
-      
-        $idea = Auth::user()->ideas()->create($request->safe()->except('steps', 'image'));
 
-        $idea->steps()->createMany(
-            collect($request->steps)->map(fn ($step) => ['description' => $step])
-        );
-        //   dd(collect($request->steps)->map(fn ($step) => ['description' => $step]));
-        // dd($request->steps);
-        $imagePath = $request->image->store('idea' ,'public');
-
-        $idea->update([
-            'image_path' => $imagePath,
-        ]);
+        $action->handle($request->safe()->all());
 
         return to_route('ideas.index')->with('success', 'Idea is Created');
     }
@@ -68,8 +55,8 @@ class IdeasController extends Controller
      */
     public function show(Ideas $idea)
     {
-        
-        return view('ideas.show',[
+
+        return view('ideas.show', [
             'idea' => $idea,
         ]);
     }
@@ -96,6 +83,7 @@ class IdeasController extends Controller
     public function destroy(Ideas $idea)
     {
         $idea->delete();
+
         return to_route('ideas.index');
     }
 }
