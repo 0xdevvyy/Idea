@@ -20,7 +20,7 @@
     :aria-hidden="!show"
     tabindex="-1"
 >
-    <x-card @click.away="show = false" class="shadow-xl max-w-2xl w-full max-h-[80-dv] overflow-auto">
+    <x-card @click.away="show = false" class="shadow-xl max-w-2xl w-full max-h-[80-dvh] overflow-auto">
         <div id="modal-{{ $name }}-title" class="font-bold text-xl">
             {{$title}}
         </div>
