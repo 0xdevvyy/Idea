@@ -11,8 +11,8 @@ Route::redirect('/', '/ideas');
 
 Route::middleware('auth')->group(function () {
     Route::get('/ideas', [IdeasController::class, 'index'])->name('ideas.index');
-    Route::post('/idea/store', [IdeasController::class, 'store'])->name('ideas.create');
-    Route::get('/idea/{idea}', [IdeasController::class, 'show'])->name('ideas.show');
+    Route::post('/ideas/store', [IdeasController::class, 'store'])->name('ideas.create');
+    Route::get('/ideas/{idea}', [IdeasController::class, 'show'])->name('ideas.show');
 
     Route::patch('/step/{step}', [StepsController::class, 'update'])->name('steps.update');
 
