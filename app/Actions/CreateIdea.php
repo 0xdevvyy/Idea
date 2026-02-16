@@ -31,7 +31,7 @@ class CreateIdea
             $idea = $this->user->ideas()->create($data);
 
             $idea->steps()->createMany(
-                collect($attributes['steps'])->map(fn ($step) => ['description' => $step])
+                collect($attributes['steps'] ?? [])->map(fn ($step) => ['description' => $step])
             );
         });
 
