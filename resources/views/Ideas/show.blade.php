@@ -4,7 +4,12 @@
             <a href="{{ route('ideas.index') }}">Back To Ideas</a>
 
             <div class="flex space-x-3 items-center">
-                <button class="btn">Edit</button>
+                <button 
+                    class="btn"
+                    x-data
+                    @click="$dispatch('open-modal', 'edit-idea')"
+                >Edit
+                </button>
                 <form action="{{ route('ideas.delete',$idea) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -72,6 +77,7 @@
             @endif
             
         </div>
+        <x-idea.modal :idea="$idea"/>
         
     </div>
 
